@@ -81,14 +81,14 @@ class User extends Authenticatable
      */
     public function replies(): HasMany
     {
-        return $this->hasMany(Reply::class);
+        return $this->hasMany(Reply::class)->orderByDesc('created_at');
     }
 
     /**
      * @param Thread $thread
      * @return bool
      */
-    public function isAuthor(Thread $thread)
+    public function isAuthor(Thread $thread): bool
     {
         return $this->id === $thread->author_id;
     }

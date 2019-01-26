@@ -2,27 +2,27 @@
 
 namespace App\Events;
 
-use App\Models\Thread\Thread;
+use App\Models\Thread\Reply;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 
-class ThreadCreated
+class ReplyCreated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
-     * @var Thread $thread
+     * @var Reply $reply
      */
-    public $thread;
+    public $reply;
 
     /**
      * Create a new event instance.
      *
-     * @param Thread $thread
+     * @param Reply $reply
      */
-    public function __construct(Thread $thread)
+    public function __construct(Reply $reply)
     {
-        $this->thread = $thread;
+        $this->reply = $reply;
     }
 }

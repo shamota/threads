@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\ReplyCreated;
 use App\Events\ThreadCreated;
+use App\Listeners\ReplyCreatedListener;
 use App\Listeners\ThreadCreatedListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -21,6 +23,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         ThreadCreated::class => [
             ThreadCreatedListener::class
+        ],
+        ReplyCreated::class => [
+            ReplyCreatedListener::class
         ]
     ];
 

@@ -67,6 +67,14 @@ class Thread extends Model
      */
     public function replies(): HasMany
     {
-        return $this->hasMany(Reply::class);
+        return $this->hasMany(Reply::class)->orderByDesc('created_at');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function collaborations(): HasMany
+    {
+        return $this->hasMany(Collaboration::class);
     }
 }

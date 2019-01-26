@@ -3,8 +3,6 @@
 namespace App\Listeners;
 
 use App\Events\ThreadCreated;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class ThreadCreatedListener
 {

@@ -2,6 +2,7 @@
 
 namespace App\Models\Thread;
 
+use App\Events\ReplyCreated;
 use App\Models\User\User;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
@@ -43,6 +44,13 @@ use Illuminate\Support\Carbon;
 class Reply extends Model
 {
     use SoftDeletes;
+
+    /**
+     * @var array $dispatchesEvents
+     */
+    protected $dispatchesEvents = [
+        'created'   => ReplyCreated::class
+    ];
 
     /**
      * @return BelongsTo

@@ -3,6 +3,7 @@
 @section('content')
     <div class="container-fluid">
         <h2>Threads</h2>
+        @include('pages.thread.parts.filter')
         @foreach ($threads as $thread)
             <div class="card mt-4">
                 <div class="card-header">
@@ -21,9 +22,10 @@
                 </div>
                 <div class="card-footer">
                     Author:
-                        <a href="{{ route('profile', $thread->author_id) }}">
-                            <strong>{{ $thread->author->email }}</strong>
-                        </a>
+                    <a href="{{ route('profile', $thread->author_id) }}">
+                        <strong>{{ $thread->author->email }}</strong>
+                    </a>
+                    <span class="float-right">Created At: {{ $thread->created_at->toDateTimeString() }}</span>
                 </div>
             </div>
         @endforeach

@@ -2,6 +2,7 @@
 namespace App\Services;
 
 
+use App\Models\Thread\Collaboration;
 use App\Models\Thread\Reply;
 use App\Models\Thread\Thread;
 use App\Models\User\User;
@@ -24,7 +25,7 @@ class ThreadService extends BaseService
         return $thread;
     }
 
-    public function update(Thread $thread, Collection $data)
+    public function update(Thread $thread, Collection $data): Thread
     {
         $thread->title = $data->get('title');
         $thread->content = $data->get('content');
@@ -33,7 +34,7 @@ class ThreadService extends BaseService
         return $thread;
     }
 
-    public function reply(Thread $thread, Collection $data, User $user = null)
+    public function reply(Thread $thread, Collection $data, User $user = null): Reply
     {
         $user = $user ?: auth()->user();
         $reply = new Reply;
@@ -45,5 +46,17 @@ class ThreadService extends BaseService
         $reply->save();
 
         return $reply;
+    }
+
+    public function collaborate(Reply $reply): Collaboration
+    {
+        $collaboration = new Collaboration;
+
+        $collaboration->reply()->associate($reply);
+        $collaboration->thread()->associate($reply->thread);
+
+        $collaboration->save();
+
+        return $collaboration;
     }
 }
