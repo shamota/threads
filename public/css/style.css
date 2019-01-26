@@ -123,3 +123,8 @@
     font-size: 24px;
     margin-top: 15px;
 }
+
+.thread-title {
+    display: inline-block;
+    float: left;
+}

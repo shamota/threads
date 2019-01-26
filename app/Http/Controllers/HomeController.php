@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\User\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 
@@ -30,7 +30,7 @@ class HomeController extends Controller
 
     public function profile(User $user)
     {
-        $threads = [];
-        return view('pages.profile', compact('user', 'threads'));
+        $threads = $user->threads;
+        return view('pages.profile.index', compact('user', 'threads'));
     }
 }

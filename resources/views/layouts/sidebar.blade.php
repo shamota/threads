@@ -12,13 +12,10 @@
             </li>
         @endif
         <li>
-            <a href="/tasks"><i class="fa fa-list"></i>Tasks</a>
-        </li>
-        <li>
             @if (Auth::check())
-                <a href="logout"><i class="fa fa-sign-out-alt"></i>Logout</a>
+                <a href="{{ route('logout') }}"><i class="fa fa-sign-out-alt"></i>Logout</a>
             @else
-                <a href="login"><i class="fa fa-sign-in-alt"></i>Login</a>
+                <a href="{{ route('login') }}"><i class="fa fa-sign-in-alt"></i>Login</a>
             @endif
         </li>
     </ul>

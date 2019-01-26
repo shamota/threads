@@ -12,7 +12,22 @@
 */
 
 Auth::routes();
-Route::get('/logout', 'Auth\LoginController@logout');
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('profile/{user}', 'HomeController@profile')->name('profile');
+
+Route::group(['middleware' => ['role:author']], function () {
+});
+
+Route::group(['middleware' => ['web']], function() {
+    Route::get('threads/{thread}', 'ThreadController@show')->name('threads.show');
+    Route::post('threads', 'ThreadController@store')->name('threads.store');
+    Route::post('threads/{thread}/replies', 'ThreadController@reply')->name('threads.reply');
+    Route::get('profile/{user}', 'HomeController@profile')->name('profile')->middleware('is_myself');
+
+    Route::group(['middleware' => ['is_author']], function() {
+
+        Route::put('threads/{thread}', 'ThreadController@edit')->name('threads.update');
+        Route::delete('threads/{thread}', 'ThreadController@remove')->name('threads.remove');
+    });
+});
