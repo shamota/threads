@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\AlphaSpace;
 use App\Rules\EndsWithDot;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Validator;
@@ -26,7 +27,7 @@ class ThreadRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'     => ['required', 'unique:threads', 'min:3'],
+            'title'     => ['required', 'unique:threads', 'min:3', new AlphaSpace],
             'content'   => ['max:255', new EndsWithDot]
         ];
     }

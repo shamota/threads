@@ -14,7 +14,7 @@
         @csrf
         <div class="form-group">
             <label for="content">Reply</label>
-            <textarea required id="content" class="form-control {{ $errors->has('content') ? ' is-invalid' : '' }}" name="content" placeholder="Your reply"></textarea>
+            <textarea rows="5" required id="content" class="form-control {{ $errors->has('content') ? ' is-invalid' : '' }}" name="content" placeholder="Your reply"></textarea>
             @if ($errors->has('content'))
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $errors->first('content') }}</strong>

@@ -8,7 +8,10 @@
         </li>
         @if (Auth::check())
             <li>
-                <a href="{{ route('profile', auth()->id()) }}"><i class="fa fa-info-circle"></i>Profile</a>
+                <a href="{{ route('threads.index') }}"><i class="fa fa-list"></i>Threads</a>
+            </li>
+            <li>
+                <a href="{{ route('profile', auth()->id()) }}"><i class="fa fa-user"></i>Profile</a>
             </li>
         @endif
         <li>

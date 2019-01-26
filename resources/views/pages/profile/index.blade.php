@@ -2,10 +2,9 @@
 
 @section('content')
     <div class="jumbotron-fluid">
-        <h2>{{ $user->email }}</h2>
-
+        <h2>Profile #{{ $user->id }}</h2>
         @if (!auth()->user()->hasRole('admin'))
-            @include('pages.thread.parts.create', ['headline' => 'Create Thread', 'thread' => null])
+            <a class="btn btn-primary" href="{{ route('threads.create') }}">Create Thread</a>
         @endif
 
         @include('pages.profile.parts.list')

@@ -3,8 +3,11 @@
         <h2>{{ $headline }}</h2>
     </div>
     <div class="card-body">
-        <form action="{{ isset($thread) ? route('threads.update', $thread->id) : route('threads.store') }}" method="post">
+        <form action="{{ $thread ? route('threads.update', $thread->id) : route('threads.store') }}" method="post">
             @csrf
+            @if ($thread)
+                {{ method_field('put') }}
+            @endif
             <div class="form-group">
                 <label for="title">Title</label>
                 <input value="{{ optional($thread)->title }}" required id="title" class="form-control {{ $errors->has('title') ? ' is-invalid' : '' }}" name="title" placeholder="Title">
@@ -17,7 +20,7 @@
 
             <div class="form-group">
                 <label for="content">Content</label>
-                <textarea id="content" class="form-control {{ $errors->has('content') ? ' is-invalid' : '' }}" name="content" placeholder="Content">{{ optional($thread)->content }}</textarea>
+                <textarea rows="5" id="content" class="form-control {{ $errors->has('content') ? ' is-invalid' : '' }}" name="content" placeholder="Content">{{ optional($thread)->content }}</textarea>
                 @if ($errors->has('content'))
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $errors->first('content') }}</strong>

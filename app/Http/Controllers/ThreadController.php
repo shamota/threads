@@ -19,18 +19,30 @@ class ThreadController extends Controller
         $this->service = $service;
     }
 
+    public function index()
+    {
+        $threads = Thread::all()->sortByDesc('created_at');
+
+        return view('pages.thread.index', compact('threads'));
+    }
+
+    public function create()
+    {
+        return view('pages.thread.create');
+    }
+
     public function store(ThreadRequest $request)
     {
         $data = collect($request->only(['title', 'content']));
         $thread = $this->service->create($data);
 
-        return redirect()->back()->withMessage(['success' => true, 'thread' => $thread]);
+        return redirect('threads')->withMessage(['success' => true, 'thread' => $thread]);
     }
 
     public function show(Thread $thread)
     {
         $user = auth()->user();
-        return view('pages.thread.index', compact('thread', 'user'));
+        return view('pages.thread.show', compact('thread', 'user'));
     }
 
     public function reply(Thread $thread, ReplyRequest $request)
@@ -39,5 +51,24 @@ class ThreadController extends Controller
         $reply = $this->service->reply($thread, $data);
 
         return redirect()->back()->withMessage(['success' => true, 'reply' => $reply]);
+    }
+
+    public function remove(Thread $thread)
+    {
+        try {
+            $thread->delete();
+        } catch (\Exception $e) {
+            return redirect()->back();
+        }
+
+        return redirect('threads');
+    }
+
+    public function update(Thread $thread, ThreadRequest $request)
+    {
+        $data = collect($request->only('title', 'content'));
+        $this->service->update($thread, $data);
+
+        return redirect()->back()->withMessage(['success' => true, 'thread' => $thread]);
     }
 }

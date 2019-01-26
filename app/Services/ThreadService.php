@@ -24,6 +24,15 @@ class ThreadService extends BaseService
         return $thread;
     }
 
+    public function update(Thread $thread, Collection $data)
+    {
+        $thread->title = $data->get('title');
+        $thread->content = $data->get('content');
+        $thread->save();
+
+        return $thread;
+    }
+
     public function reply(Thread $thread, Collection $data, User $user = null)
     {
         $user = $user ?: auth()->user();
