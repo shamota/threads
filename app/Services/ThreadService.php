@@ -11,6 +11,11 @@ use Illuminate\Support\Collection;
 
 class ThreadService extends BaseService
 {
+    /**
+     * @param Collection $data
+     * @param User|null $user
+     * @return Model
+     */
     public function create(Collection $data, User $user = null): Model
     {
         $user = $user ?: auth()->user();
@@ -25,6 +30,11 @@ class ThreadService extends BaseService
         return $thread;
     }
 
+    /**
+     * @param Thread $thread
+     * @param Collection $data
+     * @return Thread
+     */
     public function update(Thread $thread, Collection $data): Thread
     {
         $thread->title = $data->get('title');
@@ -34,6 +44,12 @@ class ThreadService extends BaseService
         return $thread;
     }
 
+    /**
+     * @param Thread $thread
+     * @param Collection $data
+     * @param User|null $user
+     * @return Reply
+     */
     public function reply(Thread $thread, Collection $data, User $user = null): Reply
     {
         $user = $user ?: auth()->user();
@@ -48,6 +64,10 @@ class ThreadService extends BaseService
         return $reply;
     }
 
+    /**
+     * @param Reply $reply
+     * @return Collaboration
+     */
     public function collaborate(Reply $reply): Collaboration
     {
         $collaboration = new Collaboration;

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Support\Carbon;
 
 /**
@@ -30,6 +31,11 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Collaboration whereThreadId($value)
  * @method static Builder|Collaboration whereUpdatedAt($value)
  * @mixin Eloquent
+ * @method static bool|null forceDelete()
+ * @method static QueryBuilder|Collaboration onlyTrashed()
+ * @method static bool|null restore()
+ * @method static QueryBuilder|Collaboration withTrashed()
+ * @method static QueryBuilder|Collaboration withoutTrashed()
  */
 class Collaboration extends Model
 {

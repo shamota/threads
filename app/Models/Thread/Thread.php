@@ -42,6 +42,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Thread whereId($value)
  * @method static Builder|Thread whereTitle($value)
  * @method static Builder|Thread whereUpdatedAt($value)
+ * @property-read Collection|Collaboration[] $collaborations
  */
 class Thread extends Model
 {

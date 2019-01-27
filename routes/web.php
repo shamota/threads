@@ -19,7 +19,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::group(['middleware' => ['role:author']], function () {
 });
 
-Route::group(['middleware' => ['web']], function() {
+Route::group(['middleware' => ['auth']], function() {
     Route::get('threads', 'ThreadController@index')->name('threads.index');
     Route::get('threads/create', 'ThreadController@create')->name('threads.create');
     Route::get('threads/{thread}', 'ThreadController@show')->name('threads.show');
