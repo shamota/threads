@@ -1,4 +1,4 @@
-#Threads Board
+# Threads Board
 
 To install the project:
  - clone repository content
